@@ -1,1 +1,13 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@include nb-install() {
+  @include nb-theme-global();
+};
 /* You can add global styles to this file, and also import other style files */
+
+nav.fixed{
+  width: 100% !important;
+}

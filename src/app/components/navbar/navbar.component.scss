@@ -1,0 +1,9 @@
+.navbar {
+  width: 90vw !important;
+}
+
+@media only screen and (max-width:425px) {
+  ul.ml-auto {
+    display: none !important;
+  }
+}

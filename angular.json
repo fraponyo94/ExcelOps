@@ -25,12 +25,20 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*.js",
+                "input": "node_modules/@webcomponents/webcomponentsjs",
+                "output": "webcomponents/"
+                }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/styles/bootstrap.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/map.js",
+            ]
           },
           "configurations": {
             "production": {
