@@ -1,0 +1,49 @@
+<!-- f7ed0919f37aa31252fd7aac5eeb86f535a75c9f -->
+<div class="container-fluid h-100">
+    <div class="row">
+        <div class="col-md-3">
+            <app-sidenav></app-sidenav>
+        </div>
+        <div class="col-md-9">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <nb-card accent="success" class="p-5">
+                                <h1 class="display-4">
+                                    {{count.businesses}}
+                                </h1>
+                                <p>Businesses</p>
+                            </nb-card>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <nb-card accent="success" class="p-5">
+                                <h1 class="display-4">
+                                    {{count.users}}
+                                </h1>
+                                <p>Users</p>
+                            </nb-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <nb-card accent="success">
+                        <nb-card-header>Popular Categories</nb-card-header>
+                        <ngx-datatable class="bootstrap" columnMode="force" [rows]="categories"
+                            [columns]="categoryColumns">
+                        </ngx-datatable>
+                    </nb-card>
+                </div>
+                <div class="w-100">
+                    <nb-card accent="success">
+                        <nb-card-header>Businesses</nb-card-header>
+                        <ngx-datatable class="bootstrap" columnMode="force" [rows]="businesses"
+                            [columns]="businessColumns">
+                        </ngx-datatable>
+                    </nb-card>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

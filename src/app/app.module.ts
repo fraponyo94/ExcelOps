@@ -1,21 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbIconModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbIconModule, NbCheckboxModule, NbAlertModule } from '@nebular/theme';
+import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SuccessComponent } from './components/success/success.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from "./services/auth/auth.service";
+import { UserService } from "./services/user/user.service";
+import { AuthGuard } from "./services/auth/auth.guard";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
     NavbarComponent,
     SuccessComponent
@@ -26,14 +29,30 @@ import { SuccessComponent } from './components/success/success.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+        }),
+      ],
+      forms: {},
+    }),
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,
     NbButtonModule,
-    NbIconModule
+    NbIconModule,
+    NbCheckboxModule,
+    NbAlertModule,
+    FormsModule,
+    HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService,
+    AuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -46,14 +46,19 @@
                             <div class="form-group">
                                 <label for="tel">Business Type</label><br>
                                 <ng-select [multiple]="true" formControlName="categories">
-                                    <ng-option *ngFor="let category of categories" [value]="category.value">
-                                        {{category.text}}</ng-option>
+                                    <ng-option *ngFor="let category of categories" [value]="category.name">
+                                        {{category.name}}</ng-option>
                                 </ng-select>
                             </div>
                             <div class="form-group">
                                 <label for="address">Business Picture</label>
-                                <input nbInput fullWidth type="file" formControlName="picture" id="picture"
-                                    accept="image/*" placeholder="eg CK Patel, Pandit Nedru Rd" required #picture>
+                                <input nbInput fullWidth type="file" id="picture"
+                                    accept="image/*" (change)="uploadPicture($event)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Portfolio Password</label>
+                                <input nbInput fullWidth type="password" formControlName="password" id="password"
+                                    required #password>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -157,8 +162,7 @@
                 <h4>Confirmation</h4>
 
                 <nb-alert *ngIf="!businessForm.valid" status="danger">
-                    Your portfolio is incomplete. Please navigate back and complete empty fields
-                    {{businessForm.value | json}}
+                    Your portfolio is incomplete. Please navigate back and complete empty fields.
                 </nb-alert>
 
                 <div *ngIf="businessForm.valid">
@@ -217,8 +221,6 @@
                             </tr>
                         </tbody>
                     </table>
-
-                    <nb-checkbox status="success" required>Yes, it is correct</nb-checkbox><br>
 
                 </div>
                 <button nbButton nbStepperPrevious size="small" class="mr-2">prev</button>
