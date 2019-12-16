@@ -36,10 +36,33 @@
                 </div>
                 <div class="w-100">
                     <nb-card accent="success">
-                        <nb-card-header>Businesses</nb-card-header>
-                        <ngx-datatable class="bootstrap" columnMode="force" [rows]="businesses"
-                            [columns]="businessColumns">
-                        </ngx-datatable>
+                        <nb-card-header>Unapproved Businesses</nb-card-header>
+                        <table class="table table-striped" id="unsorted">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
+                                    <!-- <th colspan="2">Action</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="loading">
+                                    <td>Loading data...</td>
+                                    <td>Loading data...</td>
+                                    <td>Loading data...</td>
+                                    <td>Loading data...</td>
+                                </tr>
+                                <tr *ngFor="let business of businesses" [routerLink]="['./business', business._id]">
+                                    <td>{{business.name}}</td>
+                                    <td>{{business.phoneNumber}}</td>
+                                    <td>{{business.address}}</td>
+                                    <td><button nbButton status="primary" size="small" class="mr-2">View details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </nb-card>
                 </div>
             </div>

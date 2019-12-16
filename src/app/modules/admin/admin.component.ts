@@ -7,6 +7,7 @@ import { BusinessService } from 'src/app/services/business.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  loading: boolean = true;
   categories: any[];
   count: any;
   businesses: any[];
@@ -14,13 +15,6 @@ export class AdminComponent implements OnInit {
   categoryColumns = [
     { name: 'Name' },
     { name: 'Description' }
-  ];
-
-  businessColumns = [
-    { name: 'Name' },
-    { name: 'Phone Number', prop: 'phoneNumber' },
-    { name: 'Address', prop: 'address' },
-    { name: 'Ranking Index', prop: 'ranking' },
   ];
 
   constructor(
@@ -41,11 +35,25 @@ export class AdminComponent implements OnInit {
       this.count = countData;
     });
 
-    const businessObservable = this.businessService.listBusinesses();
+    const businessObservable = this.businessService.listUnverifiedBusiness();
     businessObservable.subscribe((businesses) => {
-      businesses.length = 5;
+      if(businesses.length> 5){
+        businesses.length = 5;
+      }
       this.businesses = businesses;
+      this.loading =false;
+      this.load();
+    }, (error)=> {
+      this.loading = false;
+      this.businesses= null;
     });
   }
 
+  load() {
+    $(document).ready(function () {
+      $('#unsorted').DataTable({
+        responsive: true,
+      });
+    });
+  }
 }

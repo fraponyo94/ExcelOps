@@ -6,13 +6,14 @@
         </div>
         <div class="col-md-9">
             <nb-card accent="success">
-                <nb-card-header>Businesses <button nbButton status="success" size="small" [routerLink]="['/business']"
+                <nb-card-header>Unapproved Businesses <button nbButton status="success" size="small" [routerLink]="['/business']"
                         routerLinkActive="active" class="float-right">Add a Business</button>
                 </nb-card-header>
-                <table class="table table-striped table-bordered" id="businessTable">
+                <table class="table table-striped" id="unapprovedBusinesses">
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Owner</th>
                             <th>Phone Number</th>
                             <th>Address</th>
                             <th>Action</th>
@@ -24,13 +25,47 @@
                             <td>Loading data...</td>
                             <td>Loading data...</td>
                             <td>Loading data...</td>
+                            <td>Loading data...</td>
                         </tr>
-                        <tr *ngFor="let business of businesses" [routerLink]="['/business']" >
+                        <tr *ngFor="let business of unapprovedBusinesses" [routerLink]="['./', business._id]">
+                            <td>{{business.name}}</td>
+                            <td>{{business.ownerName}}</td>
+                            <td>{{business.phoneNumber}}</td>
+                            <td>{{business.address}}</td>
+                            <td><button nbButton status="danger" size="small" class="mr-2">View details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </nb-card>
+            <nb-card accent="success">
+                <nb-card-header>Businesses <button nbButton status="success" size="small" [routerLink]="['/business']"
+                        routerLinkActive="active" class="float-right">Add a Business</button>
+                </nb-card-header>
+                <table class="table table-striped" id="approvedBusinesses">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Ranking Index</th>
+                            <th>Action</th>
+                            <!-- <th colspan="2">Action</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="loading">
+                            <td>Loading data...</td>
+                            <td>Loading data...</td>
+                            <td>Loading data...</td>
+                            <td>Loading data...</td>
+                        </tr>
+                        <tr *ngFor="let business of businesses" [routerLink]="['./', business._id]">
                             <td>{{business.name}}</td>
                             <td>{{business.phoneNumber}}</td>
                             <td>{{business.address}}</td>
-                            <td><button nbButton status="success" size="small" class="mr-2">Approve</button>
-                                <button nbButton status="danger" size="small">Reject</button>
+                            <td>{{business.ranking}}</td>
+                            <td><button nbButton status="primary" size="small" class="mr-2">View details</button>
                             </td>
                         </tr>
                     </tbody>
